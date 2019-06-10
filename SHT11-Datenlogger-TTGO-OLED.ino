@@ -1,19 +1,8 @@
-/**
- * ReadSHT1xValues
- *
- * Read temperature and humidity values from an SHT1x-series (SHT10,
- * SHT11, SHT15) sensor.
- *
- * Copyright 2009 Jonathan Oxer <jon@oxer.com.au>
- * www.practicalarduino.com
- */
-
 #include <SHT1x.h>
 #include <OneWire.h> 
 #include <DallasTemperature.h>
 #include <SSD1306.h>
 
-// Specify data and clock connections and instantiate SHT1x object
 #define dataPin  13
 #define clockPin 14
 #define ONE_WIRE_BUS 26 
@@ -29,7 +18,7 @@ DallasTemperature sensors(&oneWire);
 
 void setup()
 {
-  Serial.begin(115200); // Open serial connection to report values to host
+  Serial.begin(115200);
 
   pinMode       (12, OUTPUT);  
   digitalWrite  (12, HIGH);
