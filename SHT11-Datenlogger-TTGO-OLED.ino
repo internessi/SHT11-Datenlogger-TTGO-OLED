@@ -113,28 +113,15 @@ void loop()
   display.display(); // display whatever is in the buffer
 
 
-  String output [7];
-  ...
+
+
+
   if(!SPIFFS.exists("/data.csv")){
     writeFile(SPIFFS, "/data.csv", "SHT_C;SHT_H;DS18_C\r\n");
   }
   output[6] = String(SHT_C) + "." + String(SHT_C2) + ";" + String(SHT_H) + "." + String(SHT_H2) + ";" + String(DS18_C) + "." + String(DS18_C2) + "\r\n";
-  appendFile(SPIFFS, "/data.csv",output[6].c_str());
-  ...
-  void appendFile(fs::FS &fs, const char * path, const char * message){
-    Serial.printf("Appending to file: %s\r\n", path);
+  appendFile(SPIFFS, "/data.csv",output[6]);
 
-    File file = fs.open(path, FILE_APPEND);
-    if(!file){
-        Serial.println("- failed to open file for appending");
-        return;
-    }
-    if(file.print(message)){
-        Serial.println("- message appended");
-    } else {
-        Serial.println("- append failed");
-    }
-  } 
   
   readFile(SPIFFS, "/data.csv");
   
@@ -187,9 +174,9 @@ void print_wakeup_reason(){
   }
 }
 
-void appendFile(fs::FS &fs, const char * path, const char * message){
+void appendFile(fs::FS &fs, const char * path, String text){
     Serial.printf("Appending to file: %s\r\n", path);
-
+    const char * message = text.c_str();
     File file = fs.open(path, FILE_APPEND);
     if(!file){
         Serial.println("- failed to open file for appending");
