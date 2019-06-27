@@ -58,7 +58,16 @@ void loop()
 
 
   
-  float temp_c;
+
+
+
+}
+
+
+
+
+void SHT_18B20_SPIFF_POWERDOWN(){
+    float temp_c;
   float temp_DS18;
   float humidity;
 
@@ -113,9 +122,6 @@ void loop()
   display.display(); // display whatever is in the buffer
 
 
-
-
-
   if(!SPIFFS.exists("/data.csv")){
     writeFile(SPIFFS, "/data.csv", "SHT_C;SHT_H;DS18_C\r\n");
   }
@@ -153,9 +159,11 @@ void loop()
   esp_deep_sleep_start();
   Serial.println("This will never be printed");
 
-
-
 }
+
+
+
+
 
 
 void print_wakeup_reason(){
